@@ -1,18 +1,35 @@
 import { Dots } from './dots';
 import { String } from './string';
-import { InstrumentDefinition, Orientation, SymbolMode } from './types';
+import {
+  HighlightMode,
+  InstrumentDefinition,
+  Orientation,
+  SymbolMode,
+} from './types';
 
 export type NeckProps = {
   symbolMode: SymbolMode;
+  highlightMode: HighlightMode;
   orientation: Orientation;
   symbolSize: number;
   instrument: InstrumentDefinition;
   onSelectFret?: (fret: number, string: number) => void;
+  fretThickness: number;
+  nutThickness: number;
 };
 
 export const Neck = (props: NeckProps) => {
-  const { symbolMode, instrument, onSelectFret, orientation, symbolSize } =
-    props;
+  const {
+    symbolMode,
+    highlightMode,
+    instrument,
+    onSelectFret,
+    orientation,
+    symbolSize,
+    fretThickness,
+    nutThickness,
+  } = props;
+  const allFrets = [...new Set(instrument.strings.map((s) => s.frets).flat())];
   return (
     <div
       style={{
@@ -25,12 +42,14 @@ export const Neck = (props: NeckProps) => {
       }}
     >
       <Dots
+        fretThickness={fretThickness}
+        nutThickness={nutThickness}
+        frets={allFrets}
         symbolSize={symbolSize}
         orientation={orientation}
         fingerboardLengthInSemitones={instrument.fingerBoardLengthInSemitones}
         dotMap={instrument.dotsMap}
       />
-      {/* <Dots size={size} horizontal={horizontal} length={length} /> */}
       <div
         style={{
           justifyContent: 'space-around',
@@ -47,10 +66,15 @@ export const Neck = (props: NeckProps) => {
                 instrument.fingerBoardLengthInSemitones
               }
               key={i}
+              highlightMode={highlightMode}
               symbolMode={symbolMode}
               symbolSize={symbolSize}
               orientation={orientation}
+              stringIndex={i}
               stringRoot={root}
+              fretThickness={fretThickness}
+              nutThickness={nutThickness}
+              allFrets={allFrets}
               frets={frets}
               onSelectFret={(fret) => {
                 onSelectFret && onSelectFret(fret, i);
@@ -60,6 +84,9 @@ export const Neck = (props: NeckProps) => {
         })}
       </div>
       <Dots
+        fretThickness={fretThickness}
+        nutThickness={nutThickness}
+        frets={allFrets}
         symbolSize={symbolSize}
         orientation={orientation}
         fingerboardLengthInSemitones={instrument.fingerBoardLengthInSemitones}

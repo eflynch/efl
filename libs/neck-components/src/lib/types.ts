@@ -33,6 +33,17 @@ export type RootNote = (typeof RootNoteList)[number];
 export const EnharmonicModeList = ['sharp', 'flat'] as const;
 export type EnharmonicMode = (typeof EnharmonicModeList)[number];
 
+export type FingerAssignment = {
+  finger: number;
+  assignments: { string: number; fret: number }[];
+};
+
+export type SymbolModeFinger = {
+  type: 'finger';
+  fingerAssignments: FingerAssignment[];
+  muted: number[];
+};
+
 export type SymbolModeInterval = {
   type: 'interval';
   rootNote: RootNote;
@@ -43,7 +54,7 @@ export type SymbolModeNote = {
   enharmonicMode: EnharmonicMode;
 };
 
-export type SymbolMode = SymbolModeInterval | SymbolModeNote;
+export type SymbolMode = SymbolModeInterval | SymbolModeNote | SymbolModeFinger;
 
 export type StringDefinition = {
   root: RootNote;
@@ -80,3 +91,16 @@ export const semitonesAboveC = (note: RootNote) => RootNoteList.indexOf(note);
 
 export const OrientationList = ['horizontal', 'vertical'] as const;
 export type Orientation = (typeof OrientationList)[number];
+
+export type HighlightModeInterval = {
+  type: 'interval';
+  rootNote: RootNote;
+  intervals: number[];
+};
+
+export type HighlightModeFrets = {
+  type: 'frets';
+  assignments: { string: number; fret: number }[];
+};
+
+export type HighlightMode = HighlightModeInterval | HighlightModeFrets;
