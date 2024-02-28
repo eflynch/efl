@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@org/neck-components": ["libs/neck-components/src/index.ts"]
+      "@efl/neck-components": ["libs/neck-components/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
