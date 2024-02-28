@@ -1,0 +1,23 @@
+{
+  "16496886713143602413": {
+    "test": {
+      "command": "jest",
+      "options": {
+        "cwd": "apps/neck"
+      },
+      "cache": true,
+      "inputs": [
+        "default",
+        "^production",
+        {
+          "externalDependencies": [
+            "jest"
+          ]
+        }
+      ],
+      "outputs": [
+        "{workspaceRoot}/coverage/apps/neck"
+      ]
+    }
+  }
+}
