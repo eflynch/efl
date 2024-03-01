@@ -4,39 +4,39 @@ import { Slug } from './slug';
 import { Fret } from './fret';
 import styled from 'styled-components';
 
-const StringContainer = styled.div<{ orientation: Orientation }>`
+const StringContainer = styled.div<{ $orientation: Orientation }>`
   position: relative;
   display: flex;
   flex-direction: ${(props) =>
-    props.orientation === 'horizontal' ? 'row' : 'column'};
+    props.$orientation === 'horizontal' ? 'row' : 'column'};
   justify-content: space-around;
 `;
 
 const StringLine = styled.div<{
-  orientation: Orientation;
-  symbolSize: number;
-  nutThickness: number;
+  $orientation: Orientation;
+  $symbolSize: number;
+  $nutThickness: number;
 }>`
   position: absolute;
   z-index: -1;
   top: ${(props) =>
-    props.orientation === 'vertical'
-      ? props.symbolSize / 2 + props.nutThickness / 2
-      : props.symbolSize / 2}px;
+    props.$orientation === 'vertical'
+      ? props.$symbolSize / 2 + props.$nutThickness / 2
+      : props.$symbolSize / 2}px;
   left: ${(props) =>
-    props.orientation === 'horizontal'
-      ? props.symbolSize / 2 + props.nutThickness / 2
-      : props.symbolSize / 2}px;
+    props.$orientation === 'horizontal'
+      ? props.$symbolSize / 2 + props.$nutThickness / 2
+      : props.$symbolSize / 2}px;
   height: ${(props) =>
-    props.orientation === 'vertical'
+    props.$orientation === 'vertical'
       ? 'calc(100% - ' +
-        (props.symbolSize / 2 + props.nutThickness).toString() +
+        (props.$symbolSize / 2 + props.$nutThickness).toString() +
         'px)'
       : '0px'};
   width: ${(props) =>
-    props.orientation === 'horizontal'
+    props.$orientation === 'horizontal'
       ? 'calc(100% - ' +
-        (props.symbolSize / 2 + props.nutThickness).toString() +
+        (props.$symbolSize / 2 + props.$nutThickness).toString() +
         'px)'
       : '0px'};
   border: 1px solid black;
@@ -129,11 +129,11 @@ export const String = (props: StringProps) => {
     })
     .flat();
   return (
-    <StringContainer orientation={orientation}>
+    <StringContainer $orientation={orientation}>
       <StringLine
-        orientation={orientation}
-        symbolSize={symbolSize}
-        nutThickness={nutThickness}
+        $orientation={orientation}
+        $symbolSize={symbolSize}
+        $nutThickness={nutThickness}
       />
       {root}
       <Fret

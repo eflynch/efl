@@ -56,7 +56,7 @@ export const Neck = (props: NeckProps) => {
           alignItems: 'center',
           display: 'flex',
           flexDirection:
-            orientation === 'horizontal' ? 'column' : 'row-reverse',
+            orientation === 'horizontal' ? 'column-reverse' : 'row',
         }}
       >
         {instrument.strings.map(({ root, frets }, i) => {
