@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import MagnoliaContext from '../context';
 import { Trunk } from '../mainstate';
 import ContentEditable from './ContentEditable';

@@ -1,4 +1,4 @@
-import { Tree as MagTree, Trunk as MagTrunk, PartialTrunk as MagPartialTrunk } from "./immutable-tree";
+import { Tree as MagTree, Trunk as MagTrunk, PartialTrunk as MagPartialTrunk } from "@efl/immutable-tree";
 
 export type Value ={
     title:string,

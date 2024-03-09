@@ -10,7 +10,7 @@ import MagnoliaContext from '../context';
 import './Magnolia.css';
 
 import ContentIFrame from './ContentIFrame';
-import { AncestorsOf, Lookup, ParentOf } from '../immutable-tree';
+import { AncestorsOf, Lookup, ParentOf } from '@efl/immutable-tree';
 import KeyDownHandler from '../keybindings';
 import { Trunk } from '../mainstate';
 

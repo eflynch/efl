@@ -6,7 +6,7 @@ import Magnolia from './components/Magnolia';
 import Whose from './components/Whose';
 import rootReducer from './reducers';
 
-import { ParseTrunk, MakeEmptyTree } from './immutable-tree';
+import { ParseTrunk, MakeEmptyTree } from '@efl/immutable-tree';
 import { MainState, PartialTrunk, Trunk } from './mainstate';
 import MagnoliaContext from './context';
 import PromiseQueue from './promise-queue';

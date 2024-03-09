@@ -1,7 +1,7 @@
 {
-  "name": "magnolial",
+  "name": "immutable-tree",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/magnolial/src",
+  "sourceRoot": "libs/immutable-tree/src",
   "projectType": "library",
   "tags": [],
   "targets": {}
