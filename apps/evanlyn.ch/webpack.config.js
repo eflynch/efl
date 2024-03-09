@@ -9,6 +9,14 @@ module.exports = {
   devServer: {
     port: 4200,
   },
+  module: {
+    rules: [
+      {
+        test: /\.mgl$/,
+        use: 'file-loader',
+      }
+    ]
+  },
   plugins: [
     new NxWebpackPlugin({
       tsConfig: './tsconfig.app.json',
@@ -16,7 +24,7 @@ module.exports = {
       main: './src/main.tsx',
       index: './src/index.html',
       baseHref: '/',
-      assets: ['./src/favicon.ico', './src/assets'],
+      assets: ['./src/icons', './src/assets'],
       styles: ['./src/styles.css'],
       outputHashing: process.env['NODE_ENV'] === 'production' ? 'all' : 'none',
       optimization: process.env['NODE_ENV'] === 'production',
