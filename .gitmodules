@@ -1,0 +1,3 @@
+[submodule "deployment/eflynch.github.io"]
+	path = deployment/eflynch.github.io
+	url = git@github.com:eflynch/eflynch.github.io
