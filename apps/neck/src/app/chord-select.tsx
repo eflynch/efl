@@ -1,5 +1,5 @@
-import { RootNoteDisplay, RootNoteDisplayList } from '@efl/neck-components';
-import { ChordType, ChordTypeList } from './chords';
+import { RootNoteDisplay, RootNoteDisplayList } from '@efl/neck-components'
+import { ChordType, ChordTypeList } from './chords'
 import {
   Button,
   Key,
@@ -9,21 +9,22 @@ import {
   Popover,
   Select,
   SelectValue,
-} from 'react-aria-components';
+} from 'react-aria-components'
 
 export type ChordSelectProps = {
-  rootNote: RootNoteDisplay;
-  chordType: ChordType;
-  onSelect: (rootNote: RootNoteDisplay, chordType: ChordType) => void;
-};
+  rootNote: RootNoteDisplay
+  chordType: ChordType
+  onSelect: (rootNote: RootNoteDisplay, chordType: ChordType) => void
+}
 export const ChordSelect = (props: ChordSelectProps) => {
-  const { rootNote, chordType, onSelect } = props;
+  const { rootNote, chordType, onSelect } = props
+
   return (
     <div style={{ display: 'flex' }}>
       <Select
         selectedKey={RootNoteDisplayList.indexOf(rootNote)}
         onSelectionChange={(key: Key) => {
-          onSelect(key as RootNoteDisplay, chordType);
+          onSelect(key as RootNoteDisplay, chordType)
         }}
       >
         <Label>Root</Label>
@@ -44,7 +45,7 @@ export const ChordSelect = (props: ChordSelectProps) => {
         aria-label="chord type"
         selectedKey={chordType}
         onSelectionChange={(key) => {
-          onSelect(rootNote, key as ChordType);
+          onSelect(rootNote, key as ChordType)
         }}
       >
         <Button>
@@ -61,5 +62,5 @@ export const ChordSelect = (props: ChordSelectProps) => {
         </Popover>
       </Select>
     </div>
-  );
-};
+  )
+}

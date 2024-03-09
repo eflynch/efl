@@ -14,40 +14,40 @@ export const ChordTypeList = [
   'm6',
   '6',
   'aug',
-] as const;
-export type ChordType = (typeof ChordTypeList)[number];
+] as const
+export type ChordType = (typeof ChordTypeList)[number]
 
 export const intervalsForChordType = (chordType: ChordType): number[] => {
   switch (chordType) {
     case 'M':
-      return [0, 4, 7];
+      return [0, 4, 7]
     case 'm':
-      return [0, 3, 7];
+      return [0, 3, 7]
     case '5':
-      return [0, 7];
+      return [0, 7]
     case '7':
-      return [0, 4, 7, 10];
+      return [0, 4, 7, 10]
     case '△':
-      return [0, 4, 7, 11];
+      return [0, 4, 7, 11]
     case 'm7':
-      return [0, 3, 7, 10];
+      return [0, 3, 7, 10]
     case 'ø7':
-      return [0, 3, 6, 10];
+      return [0, 3, 6, 10]
     case 'o7':
-      return [0, 3, 6, 9];
+      return [0, 3, 6, 9]
     case '6':
-      return [0, 4, 7, 9];
+      return [0, 4, 7, 9]
     case 'aug':
-      return [0, 4, 8];
+      return [0, 4, 8]
     case 'm6':
-      return [0, 3, 7, 9];
+      return [0, 3, 7, 9]
     case 'mM7':
-      return [0, 3, 7, 11];
+      return [0, 3, 7, 11]
     case 'sus2':
-      return [0, 2, 7];
+      return [0, 2, 7]
     case 'sus4':
-      return [0, 5, 7];
+      return [0, 5, 7]
     case 'add9':
-      return [0, 4, 7, 2];
+      return [0, 4, 7, 2]
   }
-};
+}
