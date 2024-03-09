@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@efl/magnolial": ["libs/magnolial/src/index.ts"],
       "@efl/neck-components": ["libs/neck-components/src/index.ts"]
     }
   },

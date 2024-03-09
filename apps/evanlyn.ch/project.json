@@ -1,0 +1,8 @@
+{
+  "name": "evanlyn.ch",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/evanlyn.ch/src",
+  "projectType": "application",
+  "targets": {},
+  "tags": []
+}
