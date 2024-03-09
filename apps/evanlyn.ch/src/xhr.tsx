@@ -1,7 +1,7 @@
 export function getJSON(
   url: string,
-  successHandler: (data: any) => void,
-  errorHandler: (data: any) => void
+  successHandler: (data: unknown) => void,
+  errorHandler: (data: unknown) => void
 ) {
   const xhr = new XMLHttpRequest()
   xhr.open('get', url, true)
@@ -9,9 +9,9 @@ export function getJSON(
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
       // `DONE`
-      let status = xhr.status
+      const status = xhr.status
       if (status === 200) {
-        let data = JSON.parse(xhr.responseText)
+        const data = JSON.parse(xhr.responseText)
         successHandler && successHandler(data)
       } else {
         errorHandler && errorHandler(status)
