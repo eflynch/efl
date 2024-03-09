@@ -3,6 +3,13 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/neck/src",
   "projectType": "application",
-  "targets": {},
+  "targets": {
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bash apps/neck/scripts/deploy.sh"
+      }
+    }
+  },
   "tags": []
 }
