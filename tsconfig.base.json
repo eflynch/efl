@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@efl/boardzorg-logic": ["libs/boardzorg-logic/src/index.ts"],
       "@efl/immutable-tree": ["libs/immutable-tree/src/index.ts"],
       "@efl/neck-components": ["libs/neck-components/src/index.ts"]
     }

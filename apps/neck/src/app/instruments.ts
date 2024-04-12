@@ -10,6 +10,7 @@ export const Instruments = {
   'jazz tenor banjo': makeStandardInstrument(['C', 'G', 'D', 'A'], 22, 19),
   guitar: makeStandardInstrument(['E', 'A', 'D', 'G', 'B', 'E'], 35, 24),
   dolcimer: makeDiatonicInstrument(['D', 'A', 'A'], 35, 24),
+  ukelele: makeStandardInstrument(['G', 'C', 'E', 'A'], 22, 17),
 } as const
 
 export const InstrumentList = Object.keys(Instruments)
