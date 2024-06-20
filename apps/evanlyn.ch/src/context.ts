@@ -1,20 +1,16 @@
 import { Dispatch, createContext } from 'react'
-import { MainState, Value } from './mainstate'
+import { MagnolialState, Value } from './mainstate'
 import { Action } from './actions'
 import { MakeEmptyTree } from '@efl/immutable-tree'
 
 const MagnoliaContext = createContext<{
-  state: MainState
+  magnolia: MagnolialState
   dispatch: Dispatch<Action>
 }>({
-  state: {
-    whose: 'mine',
-    synchronize: 'ok',
-    magnolia: {
-      tree: MakeEmptyTree<Value>(() => ({ title: '' })),
-      headSerial: '',
-      focusSerial: '',
-    },
+  magnolia: {
+    tree: MakeEmptyTree<Value>(() => ({ title: '' })),
+    headSerial: '',
+    focusSerial: '',
   },
   dispatch: (action: Action) => {
     console.log(action)

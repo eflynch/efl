@@ -16,8 +16,7 @@ import { Trunk } from '../mainstate'
 
 function Magnolia(): JSX.Element {
   const [mode, setMode] = useSessionStorage<string>('mode', 'vim-default')
-  const { state, dispatch } = useContext(MagnoliaContext)
-  const { magnolia } = state
+  const { magnolia , dispatch } = useContext(MagnoliaContext)
   const { tree, headSerial, focusSerial } = magnolia
 
   const ensureHeadAndFocus = () => {

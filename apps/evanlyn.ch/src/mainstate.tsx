@@ -24,10 +24,10 @@ export type MagnolialState = {
 
 export type SyncState = 'ok' | 'pending' | 'failed'
 
-export type WhoseState = 'mine' | 'yours' | 'secret'
+export type WhoseState = 'mine' | 'yours' | 'secret'|'zorg'
 
 export type MainState = {
-  magnolia: MagnolialState
+  magnolia?: MagnolialState
   whose: WhoseState
   synchronize: SyncState
 }

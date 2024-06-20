@@ -1,4 +1,11 @@
-import { Trunk, Value } from './mainstate'
+import { PartialTrunk, Trunk, Value } from './mainstate'
+
+
+export type SET_TRUNK = {
+  child: Trunk|PartialTrunk
+  initHead: string |null
+  type: 'SET_TRUNK',
+}
 
 export type REMOTESYNC = {
   type: 'REMOTESYNC'
@@ -94,6 +101,7 @@ export type DELVE_OUT = {
 export type SyncAction = REMOTESYNC | REMOTESYNC_ERROR | REMOTESYNC_OK
 
 export type MagnoliaAction =
+  | SET_TRUNK
   | PASTE
   | DELETE
   | INDENT

@@ -5,10 +5,11 @@ type WhoseProps = {
   changeWhose: (x: string) => void
   reset: () => void
   whose: string
+  signOut?: () => void
 }
 
 function Whose(props: WhoseProps): ReactElement {
-  const { changeWhose, whose } = props
+  const { changeWhose, whose, signOut } = props
   return (
     <div className="whose" style={{ display: 'flex', flexDirection: 'column' }}>
       <div style={{ display: 'flex' }}>
@@ -37,6 +38,10 @@ function Whose(props: WhoseProps): ReactElement {
       >
         reset
       </button>
+      {signOut && (<button onClick={() =>{
+        changeWhose("mine");
+        signOut()
+      }}>sign out</button>)}
     </div>
   )
 }

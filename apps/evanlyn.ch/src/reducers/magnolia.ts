@@ -1,5 +1,5 @@
 import update from 'immutability-helper';
-import {Lookup, AncestorsOf, DeleteItem, SpliceSubTree} from "@efl/immutable-tree";
+import {Lookup, AncestorsOf, DeleteItem, SpliceSubTree, ParseTrunk} from "@efl/immutable-tree";
 import {IndentItem, OutdentItem, MakeEmptyTree, ParentOf, SetCollapsed, NewChild} from "@efl/immutable-tree";
 import {PredOf, SuccOf, MoveItemUp, MoveItemDown, NewItemAbove, NewItemBelow, Undo, Redo, SetValue} from "@efl/immutable-tree";
 import { MagnolialState, Trunk, Value } from '../mainstate';
@@ -33,7 +33,21 @@ const setFocus = (state:MagnolialState, child?:Trunk):MagnolialState => {
     return update(state, {focusSerial: {$set: child.serial}});
 };
 
-const magnolia = (state:MagnolialState, action:Action):MagnolialState => {
+const magnolia = (state:MagnolialState|undefined, action:Action):MagnolialState|undefined => {
+    if (state === undefined) {
+        if (action.type === 'SET_TRUNK') {
+            return {
+                tree: ParseTrunk(action.child, () => ({
+                    title: '',
+                    link: undefined,
+                    content: undefined})),
+                headSerial: action.initHead,
+                focusSerial: action.initHead
+            }
+        } else {
+            return undefined
+        }
+    }
     if (action === undefined) {
         const tree = MakeEmptyTree<Value>(()=>{
                 return {
@@ -51,6 +65,18 @@ const magnolia = (state:MagnolialState, action:Action):MagnolialState => {
 
     const headSerial = state.headSerial ?? "";
     switch (action.type) {
+        case 'SET_TRUNK':{
+            const tree = ParseTrunk(action.child, () => ({
+                title: '',
+                link: undefined,
+                content: undefined,
+              }));
+            return update(state, {
+                tree: {$set: tree},
+                headSerial: {$set: action.initHead},
+                focusSerial: {$set: action.initHead}
+            });
+        }
         case 'DELETE':{
             if (Lookup(state.tree, headSerial) === action.child) {
                 return state;
