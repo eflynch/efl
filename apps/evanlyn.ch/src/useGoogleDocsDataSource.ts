@@ -26,6 +26,7 @@ interface GoogleDocsGetResponse {
 
 export const useGoogleDocsDataSource = (onLoad:(trunk:Trunk|PartialTrunk)=>void, documentId:string) => {
     const [isSignedIn, setIsSignedIn] = useState<boolean|undefined>(undefined);
+    const [isSyncing, setIsSyncing] = useState<boolean>(false);
 
     useEffect(() => {
         const initClient = () => {
@@ -62,6 +63,7 @@ export const useGoogleDocsDataSource = (onLoad:(trunk:Trunk|PartialTrunk)=>void,
             console.log("User is not signed in.");
             return;
         }
+        setIsSyncing(true);
 
         PromiseQueue.enqueue(
             gapi.client.docs.documents.get({documentId: documentId}).then((response:GoogleDocsGetResponse) => {
@@ -98,8 +100,10 @@ export const useGoogleDocsDataSource = (onLoad:(trunk:Trunk|PartialTrunk)=>void,
                 })
             })
             .then((response:unknown) => {
+                setIsSyncing(false);
                 // do nothing
             }).catch((error:unknown) => {
+                setIsSyncing(false);
                 console.error("Error updating document:", error);
             }));
         
@@ -149,5 +153,5 @@ export const useGoogleDocsDataSource = (onLoad:(trunk:Trunk|PartialTrunk)=>void,
         });
     }, [documentId, isSignedIn, onLoad]);
 
-    return [sync, load, isSignedIn, signIn, signOut] as [(trunk:Trunk) => void, () => void, boolean|undefined, () => void, () => void]
+    return [sync, load, isSignedIn, signIn, signOut, isSyncing] as [(trunk:Trunk) => void, () => void, boolean|undefined, () => void, () => void, boolean]
 }

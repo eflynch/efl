@@ -11,6 +11,8 @@ import MagnoliaContext from './context'
 import './index.css'
 import { Action } from './actions'
 import { useDataSource } from './useDataSource'
+import { useThrottledEffect } from './useThrottledEffect'
+import { Syncing } from './components/Syncing'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
@@ -54,7 +56,7 @@ const Main = (props: { whose: WhoseState }) => {
     dispatch({type: 'SET_TRUNK', child: trunk, initHead: initHead})
   }, [dispatch])
 
-  const [sync, isSignedIn, signIn, signOut] = useDataSource(whose, onLoad) 
+  const [sync, isSignedIn, signIn, signOut, isSyncing] = useDataSource(whose, onLoad) 
 
   useEffect(() => {
     if (whose === 'secret' && isSignedIn !== undefined && !isSignedIn) {
@@ -62,17 +64,14 @@ const Main = (props: { whose: WhoseState }) => {
     }
   }, [whose, isSignedIn, signIn])
 
-  useEffect(() => {
+
+  const runSync = useCallback(() => {
     if (trunk !== undefined) {
-      const timeout = () => {
-        sync(trunk);
-      }
-      const timeoutId = setTimeout(timeout, 5000);
-      return () => {
-        clearTimeout(timeoutId);
-      }
+      console.log("syncing")
+      sync(trunk);
     }
-  }, [trunk, sync])
+  }, [trunk, sync]);
+  useThrottledEffect(runSync, 2000);
 
   useEffect(() => {
     historyEffect(state.magnolia?.headSerial || '')
@@ -93,20 +92,23 @@ const Main = (props: { whose: WhoseState }) => {
 
   return (
     <React.StrictMode>
-      {state.magnolia && <MagnoliaContext.Provider value={{ magnolia: state.magnolia, dispatch }}>
-        <Magnolia />
-      </MagnoliaContext.Provider>
-      }
-      <Whose
-          reset={resetWhose}
-          changeWhose={(whose) => {
-            window.localStorage.setItem('whose', whose)
-            window.location.hash = ''
-            window.location.reload()
-          }}
-          whose={state.whose}
-          signOut={isSignedIn ? signOut : undefined}
-        />
+      <div style={{position:"relative"}}>
+        {state.magnolia && <MagnoliaContext.Provider value={{ magnolia: state.magnolia, dispatch }}>
+          <Magnolia />
+        </MagnoliaContext.Provider>
+        }
+        <Whose
+            reset={resetWhose}
+            changeWhose={(whose) => {
+              window.localStorage.setItem('whose', whose)
+              window.location.hash = ''
+              window.location.reload()
+            }}
+            whose={state.whose}
+            signOut={isSignedIn ? signOut : undefined}
+          />
+        <Syncing visible={isSyncing} />
+      </div> 
     </React.StrictMode>
   )
 }

@@ -73,7 +73,7 @@ export const useDataSource = (whose: 'yours' | 'mine' | 'secret' | 'zorg', onLoa
     const [localSync, localLoad] = useLocalDataSource(onLoad)
     const [defaultSync, defaultLoad] = useDefaultDataSource(onLoad)
     const [zorgSync, zorgLoad] = useZorgDataSource(onLoad)
-    const [googleSync, googleLoad, isSignedIn, signIn, signOut] = useGoogleDocsDataSource(onLoad, documentID)
+    const [googleSync, googleLoad, isSignedIn, signIn, signOut, googleIsSyncing] = useGoogleDocsDataSource(onLoad, documentID)
     const sync = useCallback((trunk:Trunk) => {
         switch(whose){
             case 'yours':
@@ -109,5 +109,7 @@ export const useDataSource = (whose: 'yours' | 'mine' | 'secret' | 'zorg', onLoa
           }
     }, [whose, defaultLoad, zorgLoad, localLoad, googleLoad]);
 
-    return [sync, isSignedIn, signIn, signOut] as [(trunk:Trunk) => void, boolean|undefined, () => void, () => void];
+    const isSyncing = googleIsSyncing;
+
+    return [sync, isSignedIn, signIn, signOut, isSyncing] as [(trunk:Trunk) => void, boolean|undefined, () => void, () => void, boolean];
 }
