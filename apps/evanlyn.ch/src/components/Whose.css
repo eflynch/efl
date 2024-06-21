@@ -9,6 +9,7 @@ div.whose {
   position: absolute;
   top: 15px;
   right: 10px;
+  z-index: 1000;
 }
 
 div.whose button:hover {
